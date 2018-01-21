@@ -23,9 +23,10 @@
                     <ListView Name="MainList" Grid.Row="1" ItemsSource="{Binding Events}" SelectedItem="{Binding SelectedEvent}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Path=EventTitle}" />
+                                <GridViewColumn Header="Creator" Width="120" DisplayMemberBinding="{Binding Path=EventTitle}" />
                                 <GridViewColumn Header="Date" Width="150" DisplayMemberBinding="{Binding Path=EventDate, StringFormat=d}" />
                                 <GridViewColumn Header="Time" Width="150" DisplayMemberBinding="{Binding Path=EventDate,StringFormat=HH:mm}" />
+                                <GridViewColumn Header="Project" Width="150" DisplayMemberBinding="{Binding Path=Project.Title}" />
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -43,10 +44,14 @@
                         <TextBlock VerticalAlignment="Center" Text="Minute:" Height="20"  Margin="10,0,0,0"/>
                         <TextBox Text="{Binding NewEventMinute, Mode=TwoWay}" Width="50"  Margin="10,0,0,0"/>
                     </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock VerticalAlignment="Center" Text="Projects:" Height="20"/>
+                        <ComboBox ItemsSource="{Binding Projects, Mode=OneWay}" DisplayMemberPath="Title" Width="50" Margin="10,0,0,0"/>
+                    </StackPanel>
                     <TextBlock Text="Type event's title:" FontWeight="Bold" Height="20"/>
                     <TextBox Height="30" Text="{Binding NewEventTitle, Mode=TwoWay}" MaxLength="30"/>
                     <TextBlock Text="Type event's details:" FontWeight="Bold" Height="20"/>
-                    <TextBox Height="100" Text="{Binding NewEventDesc, Mode=TwoWay}"  MaxLength="100"/>
+                    <TextBox Height="90" Text="{Binding NewEventDesc, Mode=TwoWay}"  MaxLength="100"/>
                     <Button FontWeight="Bold" FontSize="20" Content="Save new event" Height="50" Click="Button_Click_1"/>
                 </StackPanel>
             </TabItem>
@@ -65,10 +70,14 @@
                         <TextBlock VerticalAlignment="Center" Text="New minute:" Height="20"  Margin="10,0,0,0"/>
                         <TextBox Text="{Binding EditEventMinute , Mode=TwoWay}" Width="50"  Margin="10,0,0,0"/>
                     </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock VerticalAlignment="Center" Text="Projects:" Height="20"/>
+                        <ComboBox ItemsSource="{Binding Projects, Mode=OneWay}" DisplayMemberPath="Title" Width="50" Margin="10,0,0,0"/>
+                    </StackPanel>
                     <TextBlock Text="Set new event's title:" FontWeight="Bold" Height="20"/>
                     <TextBox Height="30" Text="{Binding SelectedEvent.EventTitle, Mode=TwoWay}"  MaxLength="30"/>
                     <TextBlock Text="Set new event's details:" FontWeight="Bold" Height="20"/>
-                    <TextBox Height="100" Text="{Binding EditEventDesc , Mode=TwoWay}" MaxLength="100"/>
+                    <TextBox Height="90" Text="{Binding EditEventDesc , Mode=TwoWay}" MaxLength="100"/>
                     <Button FontWeight="Bold" FontSize="20" Content="Edit event" Height="50" Click="Edit_Click_1"/>
                 </StackPanel>
             </TabItem>
