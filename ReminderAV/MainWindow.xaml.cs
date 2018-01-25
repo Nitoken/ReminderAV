@@ -98,7 +98,6 @@ namespace ReminderAV
             }
             set
             {
-                System.Diagnostics.Debug.WriteLine("CHANGE! " + value);
                 _newEventDate = value;
                 NotifyPropertyChanged("NewEventDate");
             }
@@ -337,14 +336,12 @@ namespace ReminderAV
         {
             EventsList el = new EventsList();
 
-            //XmlSerializer serializer = new XmlSerializer(typeof(EventsList)); //OLD?
             try
             {
                 using (var x = new FileStream(xmlDirectoryPath, FileMode.Open))
                 {
                     var xml = new XmlSerializer(typeof(EventsList));
                     el = (EventsList)xml.Deserialize(x);
-
                     bool changes = false;
                     foreach (var item in el.Events)
                     {
@@ -400,9 +397,8 @@ namespace ReminderAV
                 {
                     EventsList el = new EventsList();
                     foreach (var item in Events)
-                    {
                         el.Events.Add(item);
-                    }
+
                     var xml = new XmlSerializer(typeof(EventsList));
                     xml.Serialize(newFile, el);
                 }
@@ -424,8 +420,6 @@ namespace ReminderAV
             // Get the selected file name and display in a TextBox 
             if (result == true)
             {
-                // Open document 
-                //ConfigurationManager.AppSettings.Set("EventsPath", dlg.FileName.)
                 string newPath = dlg.FileName;
 
                 xmlDirectoryPath = ConfigurationManager.AppSettings.Get("EventsPath");
@@ -438,9 +432,7 @@ namespace ReminderAV
                     LoadEvents();
                 }
                 else
-                {
                     ConfigurationManager.AppSettings.Set("EventsPath", newPath);
-                }
             }
         }
 
@@ -456,21 +448,13 @@ namespace ReminderAV
                 while (i < 4)
                 {
                     if (i + j == j)
-                    {
                         project.Creator = data[i + j];
-                    }
                     if (i + j == j + 1)
-                    {
                         project.Title = data[i + j];
-                    }
                     if (i + j == j + 2)
-                    {
                         project.Duty = data[i + j];
-                    }
                     if (i + j == j + 3)
-                    {
                         project.DeadLine = DateTime.Parse(data[i + j]);
-                    }
                     i++;
                 }
                 Projects.Add(project);
